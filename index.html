@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CropCare Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span>🌱 CropCare</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-page="dashboard-page">Dashboard</a>
+        <a href="#" class="nav-item" data-page="sensors-page">Sensors</a>
+        <a href="#" class="nav-item" data-page="crops-page">Crops</a>
+        <a href="#" class="nav-item" data-page="irrigation-page">Irrigation</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content-area">
+      
+      <!-- DASHBOARD -->
+      <div id="dashboard-page" class="content-section active">
+        <h1 class="page-title">Dashboard Overview</h1>
+
+        <!-- Weather Card -->
+        <div class="card">
+          <h2 class="section-title">Weather</h2>
+          <p>🌤️ 28°C | Clear Skies</p>
+          <p>Humidity: 62% | Wind: 5 km/h</p>
+          <p>Next 24h: No rainfall predicted</p>
+        </div>
+
+        <!-- Soil Moisture Overview -->
+        <div class="card">
+          <h2 class="section-title">Soil Moisture</h2>
+          <div class="moisture-item">
+            <div class="moisture-header"><span>Field 1</span><span>78%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 78%;"></div></div>
+          </div>
+          <div class="moisture-item">
+            <div class="moisture-header"><span>Field 2</span><span>65%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 65%;"></div></div>
+          </div>
+          <div class="moisture-item">
+            <div class="moisture-header"><span>Field 3</span><span>45%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 45%;"></div></div>
+          </div>
+        </div>
+
+        <!-- Alerts -->
+        <div class="card">
+          <h2 class="section-title">Alerts</h2>
+          <ul>
+            <li>⚠️ Low moisture in Field 3 — irrigation recommended</li>
+            <li>✅ All sensors are reporting data normally</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SENSORS PAGE -->
+      <div id="sensors-page" class="content-section">
+        <h1 class="page-title">Sensor Status</h1>
+        <div class="card">
+          <div class="table-container">
+            <table class="sensors-table">
+              <thead>
+                <tr>
+                  <th>Sensor</th>
+                  <th>Type</th>
+                  <th>Location</th>
+                  <th>Last Reading</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>S1</td>
+                  <td>Soil Moisture</td>
+                  <td>Field 1</td>
+                  <td>78%</td>
+                  <td><span class="status-badge active">Active</span></td>
+                </tr>
+                <tr>
+                  <td>S2</td>
+                  <td>Soil Moisture</td>
+                  <td>Field 2</td>
+                  <td>65%</td>
+                  <td><span class="status-badge active">Active</span></td>
+                </tr>
+                <tr>
+                  <td>S3</td>
+                  <td>Temperature</td>
+                  <td>Field 3</td>
+                  <td>28°C</td>
+                  <td><span class="status-badge active">Active</span></td>
+                </tr>
+                <tr>
+                  <td>S4</td>
+                  <td>Humidity</td>
+                  <td>Field 1</td>
+                  <td>62%</td>
+                  <td><span class="status-badge active">Active</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CROPS PAGE -->
+      <div id="crops-page" class="content-section">
+        <h1 class="page-title">Crop Health</h1>
+        <div class="card">
+          <h2 class="section-title">Current Crops</h2>
+          <ul>
+            <li>🌾 Wheat — Growth Stage: Heading — Health: Good ✅</li>
+            <li>🌱 Mustard — Growth Stage: Vegetative — Health: Excellent 🌟</li>
+            <li>🥬 Spinach — Growth Stage: Mature — Harvest in 3 days</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Recommendations</h2>
+          <ul>
+            <li>Apply nitrogen fertilizer to Field 2 within 2 days.</li>
+            <li>Check pest traps near Field 3 — early signs of aphids detected.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- IRRIGATION PAGE -->
+      <div id="irrigation-page" class="content-section">
+        <h1 class="page-title">Irrigation Control</h1>
+        <div class="card">
+          <h2 class="section-title">Current Status</h2>
+          <p>💧 Pump: OFF</p>
+          <p>Scheduled Irrigation: Tomorrow 6:00 AM</p>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Manual Control</h2>
+          <button class="btn-primary" onclick="alert('Pump turned ON manually')">Start Pump</button>
+          <button class="btn-primary" onclick="alert('Pump turned OFF manually')" style="background-color:#e74c3c;">Stop Pump</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Page switching logic
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('.content-section');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        navItems.forEach(i => i.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        item.classList.add('active');
+        document.getElementById(item.dataset.page).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
